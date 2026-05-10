@@ -7,52 +7,47 @@
     "icon": "./assets/icon 2.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-
     "splash": {
-  "image": "./assets/splash.png",
-  "resizeMode": "contain",
-  "backgroundColor": "#ffffff"
-},
-
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
       "supportsTablet": true
     },
-
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png", 
-       "resizeMode": "contain",
+        "foregroundImage": "./assets/icon.png",
+        "resizeMode": "contain",
         "backgroundColor": "#ffffff"
-        
       },
       "edgeToEdgeEnabled": true,
       "package": "com.wildliferescue.app"
     },
-
-   "web": {
-  "bundler": "metro",
-  "output": "single",
-  "favicon": "./assets/icon 2.png",
-  "name": "wildlife-rescue-Australia",
-  "shortName": "Catchers",
-  "display": "standalone",
-  "themeColor": "#1565c0",
-  "backgroundColor": "#ffffff"
-}
-},
-
-    "extra": {
-      "eas": {
-        "projectId": "aff17be6-f45f-473f-a720-5a8edf3d2a16"
-      }
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/icon 2.png",
+      "name": "wildlife-rescue-Australia",
+      "shortName": "Catchers",
+      "display": "standalone",
+      "themeColor": "#1565c0",
+      "backgroundColor": "#ffffff"
     },
-
-    "updates": {
-      "enabled": true,
-      "fallbackToCacheTimeout": 0
-    },
-
     "plugins": [
       "expo-web-browser"
     ]
-  }
+  },
+  "extra": {
+    "eas": {
+      "projectId": "aff17be6-f45f-473f-a720-5a8edf3d2a16"
+    }
+  },
+  "updates": {
+    "enabled": true,
+    "fallbackToCacheTimeout": 0
+  },
+  "plugins": [
+    "expo-web-browser"
+  ]
+}
