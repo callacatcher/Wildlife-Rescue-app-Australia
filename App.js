@@ -1,0 +1,475 @@
+/* =========================
+     wildlife-rescue-Australia App
+  ========================= */
+
+// IMPORTS
+import { useState, useEffect } from "react";
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  Linking,
+  Image,
+  Platform,
+  ActivityIndicator
+} from "react-native";
+
+import { StatusBar } from "expo-status-bar";
+import * as Clipboard from "expo-clipboard";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Location from "expo-location";
+import { CATCHERS_DATA } from "./data/catchers";
+console.log("🔥 BUILD CHECK CATCHERS VERSION:", CATCHERS_DATA.version);
+import AppFooter from "./components/AppFooter";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import WebAdBanner from "./components/WebAdBanner";
+import ScreenFooter from "./components/ScreenFooter";
+import { stylesheet as styles } from "./styles/stylesheet";
+import FirstAidScreen from "./Sheets/FirstAidScreen";
+import SignupScreen from "./Sheets/SignupScreen";
+import MainScreen from "./Sheets/MainScreen";
+import InstallScreen from "./Sheets/InstallScreen";
+
+
+const APP_STORE_LINK = "";
+const PLAY_STORE_LINK = "";
+
+export default function App() {
+  const [screen, setScreen] = useState("home");
+
+  const [postcode, setPostcode] = useState("");
+  const [results, setResults] = useState([]);
+  const [nearbyResults, setNearbyResults] = useState([]);
+  const [catchers, setCatchers] = useState([]);
+
+  const [hasSearched, setHasSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
+const [showSplash, setShowSplash] = useState(true);
+
+  const [error, setError] = useState("");
+  const [warning, setWarning] = useState("");
+
+  const [showNotice, setShowNotice] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+
+  const [pinned, setPinned] = useState([]);
+  const [dataReady, setDataReady] = useState(false);
+  const priorityIds = ["3"];
+  const isWeb = Platform.OS === "web";
+  const [selectedAnimals, setSelectedAnimals] = useState([]);
+  const applyAnimalFilter = (list) => {
+  if (selectedAnimals.length === 0) return list;
+
+  return list.filter((c) =>
+    selectedAnimals.some((emoji) =>
+      c.animals?.includes(emoji)
+    )
+  );
+};
+
+  
+
+  const withLoading = async (fn) => {
+  try {
+    setLoading(true);
+    await fn();
+  } finally {
+    setLoading(false);
+  }
+};
+
+ /* =========================
+     SPLASH
+  ========================= */
+
+useEffect(() => {
+  setTimeout(() => {
+    setLoading(false);
+  }, 1500); // adjust timing if needed
+}, []);
+
+if (loading) {
+  return (
+    <View style={styles.splash}>
+      <Image
+        source={require("./assets/splash.png")}
+        style={styles.splashImage}
+        resizeMode="contain"
+      />
+    </View>
+  );
+}
+
+  /* =========================
+     ADSENSE
+  ========================= */
+  useEffect(() => {
+    if (isWeb) {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src =
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3658953223794524";
+      script.crossOrigin = "anonymous";
+      document.head.appendChild(script);
+
+      const meta = document.createElement("meta");
+      meta.name = "google-adsense-account";
+      meta.content = "ca-pub-3658953223794524";
+      document.head.appendChild(meta);
+    }
+  }, []);
+
+  /* =========================
+     LOAD DATA (NO CACHE)
+  ========================= */
+  useEffect(() => {
+    const loadCatchers = async () => {
+      setCatchers(CATCHERS_DATA.data);
+      setDataReady(true);
+    };
+
+    loadCatchers();
+  }, []);
+
+  useEffect(() => {
+  const t = setTimeout(() => setShowSplash(false), 1500);
+  return () => clearTimeout(t);
+}, []);
+
+  /* =========================
+     PIN SYSTEM
+  ========================= */
+  useEffect(() => {
+    const loadPinned = async () => {
+      const stored = await AsyncStorage.getItem("pinned_catchers");
+      if (stored) setPinned(JSON.parse(stored).map(String));
+    };
+    loadPinned();
+  }, []);
+
+  const savePinned = async (updated) => {
+    setPinned(updated);
+    await AsyncStorage.setItem(
+      "pinned_catchers",
+      JSON.stringify(updated)
+    );
+  };
+
+  const togglePin = (id) => {
+    const safeId = String(id);
+
+    const updated = pinned.includes(safeId)
+      ? pinned.filter((p) => p !== safeId)
+      : [...pinned, safeId];
+
+    savePinned(updated);
+  };
+
+  /* =========================
+     NOTICE
+  ========================= */
+  useEffect(() => {
+    const checkNotice = async () => {
+      const last = await AsyncStorage.getItem("notice_last_shown");
+
+      if (!last) {
+        setShowNotice(true);
+        return;
+      }
+
+      const diffDays =
+        (new Date() - new Date(last)) / (1000 * 60 * 60 * 24);
+
+      if (diffDays >= 5) setShowNotice(true);
+    };
+
+    checkNotice();
+  }, []);
+
+  /* =========================
+     SEARCH
+  ========================= */
+  const performSearch = async (value) => {
+    setError("");
+    setWarning("");
+
+    const clean = value.trim();
+
+    if (!clean || clean.length < 3) {
+      setError("Please enter a valid postcode");
+      return;
+    }
+   
+
+    const prefix = clean.slice(0, 3);
+
+    const exact = catchers.filter((c) => {
+  const matchesPostcode =
+    Array.isArray(c.postcodes) &&
+    c.postcodes.includes(clean);
+
+  const matchesAnimals =
+    selectedAnimals.length === 0 ||
+    selectedAnimals.some((emoji) =>
+      c.animals?.includes(emoji)
+    );
+
+  return matchesPostcode && matchesAnimals;
+});
+
+const nearby = catchers.filter((c) => {
+  const matchesNearby =
+    Array.isArray(c.postcodes) &&
+    c.postcodes.some((p) => p.startsWith(prefix));
+
+  const matchesAnimals =
+    selectedAnimals.length === 0 ||
+    selectedAnimals.some((emoji) =>
+      c.animals?.includes(emoji)
+    );
+
+  return matchesNearby && matchesAnimals;
+});
+
+    if (exact.length > 0) {
+      setResults(exact);
+      setNearbyResults([]);
+      setError("");
+      setWarning("");
+    } else if (nearby.length > 0) {
+      setResults(nearby);
+      setNearbyResults(nearby);
+      setWarning("We can’t find an exact match, but these may be close");
+      setError("");
+    } else {
+      setResults([]);
+      setNearbyResults([]);
+      setError(
+        "No catchers found nearby. Try 'View All Catchers'."
+      );
+      setWarning("");
+    }
+
+    setHasSearched(true);
+  };
+
+  const search = () => {
+    setError("");
+    setWarning("");
+    performSearch(postcode);
+  };
+
+  /* =========================
+     GPS
+  ========================= */
+  const useMyLocation = async () => {
+    console.log("📍 GPS BUTTON PRESSED");
+    console.log("📍 BEFORE LOADING TOGGLE");
+
+    try {
+      let { status } =
+        await Location.requestForegroundPermissionsAsync();
+console.log("📍 PERMISSION STATUS:", status);
+    if (status !== "granted") {
+  setError("Location permission denied");
+  setGpsLoading(false);
+  return;
+}
+
+      let location = await Location.getCurrentPositionAsync({});
+     console.log("📍 RAW LOCATION:", location);
+      const { latitude, longitude } = location.coords;
+
+     const response = await fetch(
+  `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
+  {
+    headers: {
+      "User-Agent": "Wildlife-Rescue-App"
+    }
+  }
+);
+
+     const data = await response.json();
+     console.log("📍 REVERSE GEO DATA:", data);
+
+console.log("📍 RAW GPS RESPONSE:", data);
+
+const detectedPostcode = data?.address?.postcode;
+
+console.log("📍 DETECTED POSTCODE:", detectedPostcode);
+
+    if (!detectedPostcode) {
+  setError("Could not detect postcode");
+  setGpsLoading(false);
+  return;
+}
+
+      setPostcode(detectedPostcode);
+      console.log("📍 FINAL POSTCODE:", detectedPostcode);
+      await performSearch(detectedPostcode);
+    } catch (err) {
+      setError("GPS error, try manual postcode");
+    } finally {
+      setGpsLoading(false);
+    }
+  };
+
+  const handlePostcodeChange = (text) => {
+    setPostcode(text.replace(/\D/g, ""));
+    setHasSearched(false);
+    setError("");
+    setWarning("");
+  };
+
+  const resetSearch = () => {
+    setPostcode("");
+    setHasSearched(false);
+    setResults([]);
+    setNearbyResults([]);
+    setError("");
+    setWarning("");
+  };
+
+  /* =========================
+     LIST LOGIC (PIN SYSTEM)
+  ========================= */
+  const searchActive = hasSearched && results.length > 0;
+
+  const baseList = searchActive ? results : catchers;
+
+  const pinnedOnly = catchers.filter((c) =>
+    pinned.includes(String(c.id))
+  );
+
+  const pinnedInSearch = searchActive
+    ? baseList.filter((c) => pinned.includes(String(c.id)))
+    : [];
+
+  const unpinned = searchActive
+    ? baseList.filter((c) => !pinned.includes(String(c.id)))
+    : showAll
+    ? catchers.filter((c) => !pinned.includes(String(c.id)))
+    : [];
+
+  const displayData = searchActive
+  ? applyAnimalFilter([...pinnedInSearch, ...unpinned])
+  : showAll
+  ? applyAnimalFilter(catchers)
+  : applyAnimalFilter(pinnedOnly);
+
+  /* =========================
+     LOADING SCREEN
+  ========================= */
+  if (!dataReady) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" />
+        <Text>Loading catchers...</Text>
+      </View>
+    );
+  }
+
+  /* =========================
+     NOTICE SCREEN
+  ========================= */
+ if (showNotice) {
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 20,
+        },
+      ]}
+    >
+      <View
+        style={{
+          width: "100%",
+          maxWidth: 420,
+          backgroundColor: "#fff",
+          padding: 20,
+          borderRadius: 12,
+          alignItems: "center",
+        }}
+      >
+        <Text style={styles.title}>Important Notice</Text>
+
+        <Text style={[styles.noticeText, { textAlign: "center", marginTop: 10 }]}>
+          Welcome to Wildlife Rescue Australia App.
+          This app is run by volunteers, but some listings
+          charge for their service. Please confirm with whoever
+          you call. Most appreciate donations.
+        </Text>
+
+        <TouchableOpacity
+          style={styles.noticeButton}
+          onPress={async () => {
+            await AsyncStorage.setItem(
+              "notice_last_shown",
+              new Date().toISOString()
+            );
+            setShowNotice(false);
+          }}
+        >
+          <Text>I Understand</Text>
+        </TouchableOpacity>
+
+        <AppFooter />
+      </View>
+    </View>
+  );
+}
+  
+
+  /* =========================
+     ROUTES
+  ========================= */
+  if (screen === "signup") {
+    return <SignupScreen onBack={() => setScreen("home")} />;
+  }
+
+  if (screen === "firstAid") {
+    return <FirstAidScreen onBack={() => setScreen("home")} />;
+  }
+
+  if (screen === "install") {
+  return <InstallScreen onBack={() => setScreen("home")} />;
+}
+
+  /* =========================
+     MAIN APP
+  ========================= */
+  return (
+    <MainScreen
+    selectedAnimals={selectedAnimals}
+setSelectedAnimals={setSelectedAnimals}
+  postcode={postcode}
+  setPostcode={setPostcode}
+  error={error}
+  warning={warning}
+  loading={loading}
+  showAll={showAll}
+  setShowAll={setShowAll}
+  search={search}
+  useMyLocation={useMyLocation}
+  withLoading={withLoading}   // ✅ ADD THIS
+  displayData={displayData}
+  pinned={pinned}
+  togglePin={togglePin}
+  priorityIds={priorityIds}   // ✅ also pass this (you’re using it in MainScreen)
+  handlePostcodeChange={handlePostcodeChange}
+  resetSearch={resetSearch}
+  onSignup={() => setScreen("signup")}
+  onFirstAid={() => setScreen("firstAid")}
+  onInstall={() => setScreen("install")}
+  APP_STORE_LINK={APP_STORE_LINK}
+  PLAY_STORE_LINK={PLAY_STORE_LINK}
+/>
+  );
+}
+// END

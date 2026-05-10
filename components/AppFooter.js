@@ -1,0 +1,46 @@
+import React from "react";
+import { View, Text, Image, StyleSheet } from "react-native";
+
+export default function AppFooter() {
+  return (
+    <View style={styles.footer}>
+      <Text style={styles.footerText}>
+        App made by Hodgsons Snakes
+      </Text>
+
+      <Image
+        source={require("../assets/footer_logo.png")}
+        style={styles.footerLogo}
+        resizeMode="contain"
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  footer: {
+    marginTop: 0,
+    paddingVertical: 0,
+    borderTopWidth: 1,
+    borderTopColor: "#ddd",
+    borderBottomWidth: 1,
+borderBottomColor: "#ddd",
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 0,
+  },
+
+  footerText: {
+    fontSize: 10,
+    color: "#777",
+    fontWeight: "500",
+    marginRight: 8,
+  },
+
+  footerLogo: {
+    width: 10,
+    height: 10,
+  },
+});
