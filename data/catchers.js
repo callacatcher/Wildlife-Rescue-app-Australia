@@ -43,15 +43,6 @@ export const CATCHERS_DATA = {
       animals: "🦎 🐍",
     },
   
-    {
-      id: "200000",
-      name: "Local Snake Catcher",
-     phone: "0459159719",
-     status: "24hr Availablity",
-      postcodes: ["4810", "4811", "4812", "4814", "4815", "4816", "4817","4818"],
-      facebook: "https://www.facebook.com/share/18PCHaud6i/",
-      animals: "🦎 🐍",
-    },
     
     
     {
@@ -74,30 +65,8 @@ export const CATCHERS_DATA = {
       facebook: "https://www.facebook.com/HodgsonsSnakes",
       animals: "🦎 🐍",
     },
-    {
-      id: "5000000",
-      name: "Central Victorian Snake Removal",
-      phone: "0419877339",
-      status: " 7:30am - 7:30pm Weekdays and 8:30am - 7:30pm Weekends",
-      postcodes: ["3064", "3099", "3432", "3433", "3435", 
-        "3521", "3522", "3523", "3607", "3608", "3658", 
-        "3659", "3660", "3715", "3117", "3718", "3719", 
-        "3751", "3753", "3754", "3755", "3756", "3757", 
-        "3758", "3761", "3762", "3763", "3764", "3662", 
-        "3663", "3664", "3665", "3666", "3711", "3714"],
-      website: "https://sites.google.com/view/cvsnakeremoval/home",
-      facebook: "https://www.facebook.com/share/18PwogRR1t/",
-      animals: "🦎 🐍",
-    },
-    {
-      id: "600000",
-      name: "Newcastle Snake Control",
-      phone: "0404939896",
-      status: "24hr Emergency",
-      postcodes: ["2286"],
-      facebook: "http://www.facebook.com.au/snakecatcherbronte",
-      animals: "🦎 🐍",
-    },
+    
+    
     {
       id: "700000",
       name: "Wild Woofers snake catching, pet sitting and dog walking",
@@ -108,79 +77,8 @@ export const CATCHERS_DATA = {
       facebook: "https://www.facebook.com/share/17qZode5JH/?mibextid=wwXIfr",
       animals: "🦎 🐍",
     },
-    {
-      id: "800000",
-      name: "Bass Coast Snake Catchers",
-      phone: "0429665399",
-      status: "24/7 Emergency",
-      postcodes: ["3992", "3995", "3984", "3925", "3951"],
-      facebook: "https://www.facebook.com/p/Bass-Coast-Snake-Catcher-61553720065841/",
-      animals: "🦎 🐍",
-    },
-     {
-      id: "900000",
-      name: "Snake Catcher Victoria",
-      phone: "0408067062",
-      status: "24hr Emergency",
-      postcodes: ["3931", "3175", "3199", "3172", "3197", "3806",
-     "3977", "3810", "3978", "3936", "3926", "3911", "3918",
-    "3942", "3939", "3929", "3915", "3920", "3938", "3928", 
-    "3916", "3926", "3933", "3931", "3930", "3934", "3916", 
-    "3944", "3937", "3939", "3940", "3941", "3936", "3916",
-     "3927", "3912", "3943", "3941", "3915", "3913"],
-       website: "https://snakecatchervictoria.com.au",
-      facebook: "https://www.facebook.com/p/Snake-Catcher-Victoria-Australia-100083695991597/",
-      animals: "🦎 🐍",
-    },
 
-    {
-      id: "1000000",
-      name: "Michael Tingate Snake Removal",
-      phone: "0409160151",
-      status: "24/7 Emergency",
-      postcodes: ["3342", "3341", "3345", "3340", "3460",
-      "3458"],
-      animals: "🦎 🐍",
-    },
-
-    {
-  id: "1100000",
-  name: "Miss Slither’n Reptile Relocations",
-  phone: "0499881474",
-  status: "24/7 Emergency",
-  postcodes: [
-    "3340", "3341", "3030", "3029", "3335",
-    "3427", "3437", "3350", "3351", "3020",
-    "3352", "3342", "3028", "3027",
-    "3025", "3028", "3022", "3023", "3024",
-    "3033", "3350", "3460", "3444", "3446",
-    "3442", "3429", "3435", "3431", "3037", 
-    "3032", "3040", "3338", "3339", "3000",
-    "3016", "3212", "3211", "3337", 
-    "3026", "3025", "3018", "3019"
-  ],
-  facebook: "https://www.facebook.com/missslithern/",
-  animals: "🦎 🐍",
-},
-
-     {
-      id: "1200000",
-  name: "STEWY THE SNAKE CATCHER PTY LTD",
-  phone: "0413277588",
-  status: "24/7",
-  postcodes: ["3030", "3000",
-     "3001", "3002", "3003", "3004", "3005", "3006",
-      "3008", "3011", "3012", "3013", "3015", "3016",
-       "3018", "3019", "3020", "3021", "3022", "3023",
-        "3024", "3025", "3026", "3027", "3028", "3029",
-          "3031", "3032", "3033", "3034", "3036",
-          "3037", "3038", "3039", "3040", "3041", "3042",
-           "3043", "3045", "3066", "3067", "3121", "3207",
-            "3211", "3212", "3335", "3337", "3338", "3340"],
-   website: "http://www.stewythesnakecatcher.com.au",
-      facebook: "https://www.facebook.com/stewythesnakecatcher/",
-      animals: "🦎 🐍",
-    },
+     
     {
   id: "1300000",
   name: "That Snake Lady",
@@ -227,57 +125,6 @@ export const CATCHERS_DATA = {
   facebook: "https://www.facebook.com/p/Snakes-and-More-Wildlife-Rescue-100027880040171/",
   animals: "🦎 🐍",
 },
-{
-  id: "1600000",
-  name: "Tumesy's Reptile Wrangling",
-  phone: "0472703161",
-  status: "24hr Emergency",
-  postcodes: ["2324", "2318", "2321", "2295", "2300", "2304", "2320"],
-  website: "www.tumesysreptilewrangling.com.au",
-  facebook: "https://www.facebook.com/profile.php?id=61576278014223#",
-  animals: "🦎 🐍",
-},
-
-{
-  id: "1700000",
-  name: "Tinks Snake Relocations",
-  phone: "0439244781",
-  status: "24/7 Emergency",
-  postcodes: [
-    "2319", "2324", "2300", "2302", "2293", "2304",
-    "2250", "2259", "2256", "2257", "2261", "2263",
-    "2252", "2260", "2321", "2420", "2415", "2318", "2423"],
-  facebook: "https://www.facebook.com/profile.php?id=61588687642657",
-  animals: "🦎 🐍",
-},
-
-{
-  id: "1800000",
-  name: "Tilligerry reptile relocation services",
-  phone: "0426535505",
-  status: "24/7 Emergency",
-  postcodes: [
-    "2319", "2324", "2300", "2302", "2293", "2304",
-    "2250", "2259", "2256", "2257", "2261", "2263",
-    "2252", "2260", "2321", "2420", "2415", "2318", "2423"],
-  facebook: "https://www.facebook.com/profile.php?id=61554375746823",
-  animals: "🦎 🐍",
-},
-
-{
-  id: "1900000",
-  name: "Medusa Snake Catcher",
-  phone: "0427775959",
-  status: "24/7 Emergency",
-  postcodes: [
-    "2147", "2148", "2763", "2761", "2770", "2760",
-     "2762", "2765", "2768", "2155", "2750", "2747",
-      "2749", "2759", "2756", "2753", "2775", "2758",
-       "2774", "2780", "2170", "2171"],
-  website: "https://medusasydney.com.au/",
-  facebook: "https://www.facebook.com/medusasnakecatcher",
-  animals: "🦎 🐍",
-},
 
 {
   id: "2000000",
@@ -298,89 +145,7 @@ export const CATCHERS_DATA = {
   status: "24/7 Emergency",
   postcodes: ["4470"],
   facebook: "https://www.facebook.com/profile.php?id=61557831835373",
- animals: "🦎 🐍",
-},
-
-{
-      id: "2200000",
-      name: "Barossa Reptile Service",
-     phone: "0410571931",
-     status: "24hr Availablity",
-      postcodes: ["5114", "5115", "5118", "5231", "5350",
-         "5351", "5352", "5355", "5360", "5371", "5372",
-          "5373", "5400"],
-      website: "https://www.barossareptileservice.com",
-      facebook: "https://www.facebook.com/barossareptileservice",
-     animals: "🦎 🐍",
-    },
-
-    {
-      id: "2300000",
-      name: "Snake snatchers adelaide hills",
-  phone: "0416144392",
-  status: "24hr Emergency",
-  postcodes: ["5155", "5152", "5154", "5153", "5245", "5144", 
-    "5142", " 5201", "5242", "5244", " 5064"],
-      animals: "🦎 🐍",
-      facebook: "https://www.facebook.com/profile.php?id=100089843018680",
-    },
-{
-      id: "2400000",
-      name: "Trayhurn's Reptile Relocation",
-  phone: "0478841226",
-  status: "24hr Emergency",
-  postcodes: ["2787", "2795"],
-      animals: "🦎 🐍",
-      facebook: "https://www.facebook.com/profile.php?id=61588644272225",
-    },
-
-    {
-      id: "2500000",
-      name: "Rob’s Snake & Reptile Relocation",
-  phone: "0494614703",
-  status: " 7am- 12am (Midnight)",
-  postcodes: ["2322", "2323", "2320", "2421", 
-    "2321", "2330", "2420", "2327", "2325", "2334", "2335"],
-      animals: "🦎 🐍",
-      facebook: "https://www.facebook.com/profile.php?id=61583909012064",
-    },
-    
-     {
-      id: "2600000",
-      name: "Narellan Snake Catcher",
-  phone: "0405174734",
-  status: " 24hr Emergency",
-  postcodes: ["2567", "2560", "2570"],
-      animals: "🦎 🐍",
-       website: "www.narellansnakecatcher.com.au",
-      facebook: "https://www.facebook.com/share/1Dm7dUea8F/",
-    },
-
-    {
-      id: "2700000",
-       name: "Australian Snake Catchers", 
-      phone: "0410761575",
-      status: "24 hr Emergency", 
-    postcodes: ["2975", "2774", "2750", "2000", "2777", 
-      "2753", "2756", "2790", "2774", "2148", "2752",
-      "2787", "2799", "2756", "2780", "2753", "2745", 
-      "2170", "2150", "2800", "2850", "2795"],
-      animals: "🦎 🐍",
-      facebook: "https://www.facebook.com/share/1AyvXBgZyy/ ", 
-    },
-
-    {
-      id: "2800000",
-  name: "southernhighlands & south coast snake catchers", 
-  phone: "0400734225",
-  status: "24hr Emergency",
-  postcodes: [ "2577", "2570", "2580",  "2575", "2576",
-     "2577", "2578", "2571", "2535", "2536", "2538",
-     "2539", "2540", "2541", "2577", "2622", "2580", 
-    "2541"],
-    animals: "🦎 🐍",
-  website: "https://www.southernhighlandssnakecatchers.com.au",
-facebook: "https://www.facebook.com/share/17rrVZMyzy/?mibextid=wwXIfr",
-  },
-  ]
+ animals: "🦘 🐨 🦅 🦜 🦇 🦎 🐍",
+}
+]
 };
