@@ -1,5 +1,5 @@
 export const CATCHERS_DATA = {
-  version: "6324456345",
+  version: "56345",
   data: [
     
 {
@@ -107,7 +107,7 @@ export const CATCHERS_DATA = {
     "3337", "3063", "3043"],
   
   facebook: "https://www.facebook.com/p/Lil-Miss-Snake-Catcher-100064539260654/",
-  animals: "🦎 🐍",
+  animals: "🦘 🐨 🦅 🦜 🦇 🦎 🐍",
 },
 
 {
@@ -123,7 +123,8 @@ export const CATCHERS_DATA = {
      "3805", "3978", "3980", "3882", "3909"],
   website: "https://snakesandmorewildliferescue.com.au/",
   facebook: "https://www.facebook.com/p/Snakes-and-More-Wildlife-Rescue-100027880040171/",
-  animals: "🦎 🐍",
+   animals: "🦘 🐨 🦅 🦜 🦇 🦎 🐍",
+
 },
 
 {
