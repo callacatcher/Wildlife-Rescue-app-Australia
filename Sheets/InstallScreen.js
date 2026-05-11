@@ -31,7 +31,7 @@ export default function InstallScreen({ onBack }) {
 
         {/* TITLE */}
         <Text style={[styles.title, { marginTop: 30 }]}>
-          Install Call-A-Catcher
+          Install Wildlife-Rescue-App
         </Text>
 
         {/* MAIN INSTRUCTIONS */}
