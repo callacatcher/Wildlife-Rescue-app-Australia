@@ -29,6 +29,14 @@ export const CATCHERS_DATA = {
       animals: "🦘 🐨 🦅 🦜 🦇 🦎 🐍",
     },
 
+    {
+      id: "4",
+      name: "Charlotte T",
+      phone: "0447006099",
+      status: "24/7 Emergency",
+      postcodes: ["3012", "3029", "3337"],
+      animals: "🦘 🐨 🦅 🦜 🦎 ",
+    },
 
     {
       id: "100000",
