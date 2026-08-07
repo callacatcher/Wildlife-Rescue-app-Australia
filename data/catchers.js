@@ -1,5 +1,5 @@
 export const CATCHERS_DATA = {
-  version: "56546345",
+  version: "5546345",
   data: [
     
 {
@@ -157,14 +157,6 @@ export const CATCHERS_DATA = {
  animals: "🦘 🐨 🦅 🦜 🦇 🦎 🐍",
 },
 
-{
-  id: "2200000",
-  name: "SM Wildlife",
-  phone: "0406663131",
-  status: "24/7 Emergency",
-  postcodes: ["4470"],
-  facebook: "https://www.facebook.com/profile.php?id=61557831835373",
- animals: "🦘 🐨 🦅 🦜 🦇 🦎 🐍",
-}
+
 ]
 };
